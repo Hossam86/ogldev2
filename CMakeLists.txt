@@ -49,6 +49,16 @@ CPMAddPackage(
 	GIT_TAG 3.3.8
 )
 
+# We manually download GLM into our source directory so the user can access
+# glm through 'glm/...'. There is no build step since this is a header only
+# library.
+CPMAddPackage(
+	NAME glm
+	GIT_REPOSITORY git@github.com:g-truc/glm.git
+	GIT_TAG 0.9.9.8
+	DOWNLOAD_ONLY True
+)
+include_directories(${glm_SOURCE_DIR}/)
 
 
 
@@ -104,22 +114,22 @@ set_target_properties(tutorial02_red_triangle PROPERTIES XCODE_ATTRIBUTE_CONFIGU
 create_target_launcher(tutorial02_red_triangle WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial02_red_triangle/")
 create_default_target_launcher(tutorial02_red_triangle WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial02_red_triangle/") # tut 1 is not the default or people would complain that tut 2 doesn't work
 
-# # Tutorial 3
-# add_executable(tutorial03_matrices 
-# 	tutorial03_matrices/tutorial03.cpp
-# 	common/shader.cpp
-# 	common/shader.hpp
+# Tutorial 3
+add_executable(tutorial03_matrices 
+	tutorial03_matrices/tutorial03.cpp
+	include/common/shader.cpp
+	include/common/shader.hpp
 
-# 	tutorial03_matrices/SimpleTransform.vertexshader
-# 	tutorial03_matrices/SingleColor.fragmentshader
-# )
-# #set_target_properties(tutorial03_matrices PROPERTIES RUNTIME_OUTPUT_DIRECTORY /test1)
-# target_link_libraries(tutorial03_matrices
-# 	${ALL_LIBS}
-# )
-# # Xcode and Visual working directories
-# set_target_properties(tutorial03_matrices PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tutorial03_matrices/")
-# create_target_launcher(tutorial03_matrices WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial03_matrices/") # Visual
+	tutorial03_matrices/SimpleTransform.vs
+	tutorial03_matrices/SingleColor.fs
+)
+#set_target_properties(tutorial03_matrices PROPERTIES RUNTIME_OUTPUT_DIRECTORY /test1)
+target_link_libraries(tutorial03_matrices
+	${ALL_LIBS}
+)
+# Xcode and Visual working directories
+set_target_properties(tutorial03_matrices PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tutorial03_matrices/")
+create_target_launcher(tutorial03_matrices WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial03_matrices/") # Visual
 
 # # Tutorial 4
 # add_executable(tutorial04_colored_cube
@@ -683,10 +693,10 @@ add_custom_command(
    TARGET tutorial02_red_triangle POST_BUILD
    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial02_red_triangle${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial02_red_triangle/"
 )
-# add_custom_command(
-#    TARGET tutorial03_matrices POST_BUILD
-#    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial03_matrices${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial03_matrices/"
-# )
+add_custom_command(
+   TARGET tutorial03_matrices POST_BUILD
+   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial03_matrices${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial03_matrices/"
+)
 # add_custom_command(
 #    TARGET tutorial04_colored_cube POST_BUILD
 #    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial04_colored_cube${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial04_colored_cube/"
@@ -782,5 +792,5 @@ add_custom_command(
 
 elseif (${CMAKE_GENERATOR} MATCHES "Xcode" )
 
-endif (NOT ${CMAKE_GENERATOR} MATCHES "Xcode" )
+endif (NOT ${CMAKE_GENERATOR} MATCHES "Xcode")
 

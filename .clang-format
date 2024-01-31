@@ -6,7 +6,7 @@ NamespaceIndentation: All
 AlwaysBreakAfterReturnType: All
 BinPackArguments: false
 BinPackParameters: false
-SortIncludes: true
+SortIncludes: false
 SortUsingDeclarations: true
 SpaceAfterCStyleCast: false
 SpaceAfterTemplateKeyword: false
