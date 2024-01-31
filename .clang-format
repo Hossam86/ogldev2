@@ -7,7 +7,7 @@ AlwaysBreakAfterReturnType: All
 BinPackArguments: false
 BinPackParameters: false
 SortIncludes: false
-SortUsingDeclarations: true
+SortUsingDeclarations: false
 SpaceAfterCStyleCast: false
 SpaceAfterTemplateKeyword: false
 AlwaysBreakTemplateDeclarations: Yes

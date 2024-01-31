@@ -131,21 +131,21 @@ target_link_libraries(tutorial03_matrices
 set_target_properties(tutorial03_matrices PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tutorial03_matrices/")
 create_target_launcher(tutorial03_matrices WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial03_matrices/") # Visual
 
-# # Tutorial 4
-# add_executable(tutorial04_colored_cube
-# 	tutorial04_colored_cube/tutorial04.cpp
-# 	common/shader.cpp
-# 	common/shader.hpp
+# Tutorial 4
+add_executable(tutorial04_colored_cube
+	tutorial04_colored_cube/tutorial04.cpp
+	include/common/shader.cpp
+	include/common/shader.hpp
 	
-# 	tutorial04_colored_cube/TransformVertexShader.vertexshader
-# 	tutorial04_colored_cube/ColorFragmentShader.fragmentshader
-# )
-# target_link_libraries(tutorial04_colored_cube
-# 	${ALL_LIBS}
-# )
-# # Xcode and Visual working directories
-# set_target_properties(tutorial04_colored_cube PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tutorial04_colored_cube/")
-# create_target_launcher(tutorial04_colored_cube WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial04_colored_cube/")
+	tutorial04_colored_cube/TransformVertexShader.vs
+	tutorial04_colored_cube/ColorFragmentShader.fs
+)
+target_link_libraries(tutorial04_colored_cube
+	${ALL_LIBS}
+)
+# Xcode and Visual working directories
+set_target_properties(tutorial04_colored_cube PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tutorial04_colored_cube/")
+create_target_launcher(tutorial04_colored_cube WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial04_colored_cube/")
 
 # # Tutorial 5
 # add_executable(tutorial05_textured_cube
@@ -697,10 +697,10 @@ add_custom_command(
    TARGET tutorial03_matrices POST_BUILD
    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial03_matrices${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial03_matrices/"
 )
-# add_custom_command(
-#    TARGET tutorial04_colored_cube POST_BUILD
-#    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial04_colored_cube${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial04_colored_cube/"
-# )
+add_custom_command(
+   TARGET tutorial04_colored_cube POST_BUILD
+   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial04_colored_cube${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial04_colored_cube/"
+)
 # add_custom_command(
 #    TARGET tutorial05_textured_cube POST_BUILD
 #    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial05_textured_cube${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial05_textured_cube/"
