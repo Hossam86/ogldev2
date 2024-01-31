@@ -87,22 +87,22 @@ target_link_libraries(tutorial01_first_window
 set_target_properties(tutorial01_first_window PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tutorial01_first_window/")
 create_target_launcher(tutorial01_first_window WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial01_first_window/")
 
-# # Tutorial 2
-# add_executable(tutorial02_red_triangle 
-# 	tutorial02_red_triangle/tutorial02.cpp
-# 	common/shader.cpp
-# 	common/shader.hpp
+# Tutorial 2
+add_executable(tutorial02_red_triangle 
+	tutorial02_red_triangle/tutorial02.cpp
+	include/common/shader.cpp
+	include/common/shader.hpp
 	
-# 	tutorial02_red_triangle/SimpleFragmentShader.fragmentshader
-# 	tutorial02_red_triangle/SimpleVertexShader.vertexshader
-# )
-# target_link_libraries(tutorial02_red_triangle
-# 	${ALL_LIBS}
-# )
-# # Xcode and Visual working directories
-# set_target_properties(tutorial02_red_triangle PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tutorial02_red_triangle/")
-# create_target_launcher(tutorial02_red_triangle WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial02_red_triangle/")
-# create_default_target_launcher(tutorial02_red_triangle WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial02_red_triangle/") # tut 1 is not the default or people would complain that tut 2 doesn't work
+	tutorial02_red_triangle/SimpleFragmentShader.fs
+	tutorial02_red_triangle/SimpleVertexShader.vs
+)
+target_link_libraries(tutorial02_red_triangle
+	${ALL_LIBS}
+)
+# Xcode and Visual working directories
+set_target_properties(tutorial02_red_triangle PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tutorial02_red_triangle/")
+create_target_launcher(tutorial02_red_triangle WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial02_red_triangle/")
+create_default_target_launcher(tutorial02_red_triangle WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial02_red_triangle/") # tut 1 is not the default or people would complain that tut 2 doesn't work
 
 # # Tutorial 3
 # add_executable(tutorial03_matrices 
@@ -679,10 +679,10 @@ add_custom_command(
    TARGET tutorial01_first_window POST_BUILD
    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial01_first_window${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial01_first_window/"
 )
-# add_custom_command(
-#    TARGET tutorial02_red_triangle POST_BUILD
-#    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial02_red_triangle${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial02_red_triangle/"
-# )
+add_custom_command(
+   TARGET tutorial02_red_triangle POST_BUILD
+   COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial02_red_triangle${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial02_red_triangle/"
+)
 # add_custom_command(
 #    TARGET tutorial03_matrices POST_BUILD
 #    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial03_matrices${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial03_matrices/"
