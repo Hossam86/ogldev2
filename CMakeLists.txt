@@ -209,27 +209,27 @@ target_link_libraries(tutorial07_model_loading
 set_target_properties(tutorial07_model_loading PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tutorial07_model_loading/")
 create_target_launcher(tutorial07_model_loading WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial07_model_loading/")
 
-# # Tutorial 8
-# add_executable(tutorial08_basic_shading
-# tutorial08_basic_shading/tutorial08.cpp
-# common/shader.cpp
-# common/shader.hpp
-# common/controls.cpp
-# common/controls.hpp
-# common/texture.cpp
-# common/texture.hpp
-# common/objloader.cpp
-# common/objloader.hpp
+# Tutorial 8
+add_executable(tutorial08_basic_shading
+tutorial08_basic_shading/tutorial08.cpp
+include/common/shader.cpp
+include/common/shader.hpp
+include/common/controls.cpp
+include/common/controls.hpp
+include/common/texture.cpp
+include/common/texture.hpp
+include/common/objloader.cpp
+include/common/objloader.hpp
 
-# tutorial08_basic_shading/StandardShading.vertexshader
-# tutorial08_basic_shading/StandardShading.fragmentshader
-# )
-# target_link_libraries(tutorial08_basic_shading
-# ${ALL_LIBS}
-# )
-# # Xcode and Visual working directories
-# set_target_properties(tutorial08_basic_shading PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tutorial08_basic_shading/")
-# create_target_launcher(tutorial08_basic_shading WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial08_basic_shading/")
+tutorial08_basic_shading/StandardShading.vs
+tutorial08_basic_shading/StandardShading.fs
+)
+target_link_libraries(tutorial08_basic_shading
+${ALL_LIBS}
+)
+# Xcode and Visual working directories
+set_target_properties(tutorial08_basic_shading PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/tutorial08_basic_shading/")
+create_target_launcher(tutorial08_basic_shading WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tutorial08_basic_shading/")
 
 # # Tutorial 9
 # add_executable(tutorial09_vbo_indexing
@@ -708,10 +708,11 @@ if(NOT ${CMAKE_GENERATOR} MATCHES "Xcode")
 		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial07_model_loading${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial07_model_loading/"
 	)
 
-# add_custom_command(
-# TARGET tutorial08_basic_shading POST_BUILD
-# COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial08_basic_shading${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial08_basic_shading/"
-# )
+	add_custom_command(
+		TARGET tutorial08_basic_shading POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial08_basic_shading${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial08_basic_shading/"
+	)
+
 # add_custom_command(
 # TARGET tutorial09_vbo_indexing POST_BUILD
 # COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/tutorial09_vbo_indexing${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/tutorial09_vbo_indexing/"
